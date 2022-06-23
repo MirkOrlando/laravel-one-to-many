@@ -13,7 +13,7 @@
                 {{ session('message') }}
             </div>
         @endif
-        <table class="table table-striped table-inverse table-responsive">
+        <table class="table table-striped">
             <thead class="thead-inverse">
                 <tr>
                     <th>ID</th>
