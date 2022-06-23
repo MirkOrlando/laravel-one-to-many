@@ -44,9 +44,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $val_data = $request->all();
+        $slug = Str::slug($request->name);
+        $val_data['slug'] = $slug;
+        //dd($val_data);
+        $category->update($val_data);
+        return redirect()->back()->with('message', "Category \"$slug\" updated successfully");
     }
 
     /**
@@ -57,6 +62,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back()->with('message', "Category \"$category->slug\" deleted successfully");
     }
 }

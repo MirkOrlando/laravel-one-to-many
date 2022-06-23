@@ -3,11 +3,16 @@
 @section('content')
     <div class="container">
         <h1>All Categories</h1>
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="row">
             <div class="col">
-                <form action="{{ route('admin.categories.store') }}" method="post">
+                <form action="{{ route('admin.categories.store') }}" method="post" class="d-flex pr-3">
                     @csrf
-                    <div class="mb-3">
+                    <div class="mb-3 mr-3 flex-grow-1">
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                             id="name" aria-describedby="nameHelper" placeholder="New Category Name"
                             value="{{ old('name') }}">
@@ -16,7 +21,9 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
                 </form>
             </div>
             <div class="col">
@@ -37,13 +44,21 @@
                                     <form id="category-{{ $category->id }}"
                                         action="{{ route('admin.categories.update', $category->slug) }}" method="post">
                                         @csrf
+                                        @method('PATCH')
                                         <input class="border-0 bg-transparent" type="text" name="name" id="name"
                                             value="{{ $category->name }}">
                                     </form>
                                 </td>
-                                <td>{{ count($category->posts) }}</td>
-                                <td>
-                                    Update - Delete
+                                <td class="text-center">{{ count($category->posts) }}</td>
+                                <td class="d-flex" style="gap: 0.5rem">
+                                    <button form="category-{{ $category->id }}" type="submit"
+                                        class="btn btn-secondary btn-sm">Update</button>
+                                    <form action="{{ route('admin.categories.destroy', $category->slug) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
