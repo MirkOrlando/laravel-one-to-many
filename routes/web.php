@@ -25,6 +25,9 @@ Route::middleware('auth')
         Route::resource('posts', 'PostController')->parameters([
             'posts' => 'post:slug'
         ]);
+        Route::resource('/categories', 'CategoryController')->parameters([
+            'categories' => 'category:slug'
+        ])->except('show', 'create', 'edit');
     });
 
 Route::get("{any?}", function () {
