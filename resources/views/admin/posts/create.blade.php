@@ -29,12 +29,21 @@
                 <small id="coverHelper" class="form-text text-muted">Post's cover image urls here</small>
             </div>
             <div class="mb-3">
+                <label for="category_id" class="form-label">Categories</label>
+                <select class="form-control" name="category_id" id="category_id">
+                    <option value="" selected>Select a Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
                 <textarea class="form-control @error('contemt') is-invalid @enderror" name="content" id="content" rows="4">
                 {{ old('content') }}
               </textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </form>
     </div>
 @endsection
