@@ -47,7 +47,7 @@ class PostController extends Controller
         $validated = $request->validated();
         $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
-        //dd($validated);
+        // dd($validated);
         Post::create($validated);
         return redirect()->route('admin.posts.index')->with('message', "Post Created Successfully");
     }
