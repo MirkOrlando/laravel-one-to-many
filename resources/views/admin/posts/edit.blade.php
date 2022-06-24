@@ -32,9 +32,10 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label">Categories</label>
                 <select class="form-control" name="category_id" id="category_id">
+                    <option value="" {{ !$post->category_id ? 'selected' : '' }}>Select a Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
-                            {{ $category->id == old('category_id', $post->category_id) ? 'selected' : '' }}>
+                            {{ $category->id == old('category_id', $post->category_id ? '$post->category_id' : '') ? 'selected' : '' }}>
                             {{ $category->name }}</option>
                     @endforeach
                 </select>
