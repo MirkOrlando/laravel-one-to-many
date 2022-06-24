@@ -10,7 +10,7 @@
         @endif
         <div class="row">
             <div class="col">
-                <form action="{{ route('admin.categories.store') }}" method="post" class="d-flex pr-3 mt-3">
+                <form action="{{ route('admin.categories.store') }}" method="post" class="d-flex pr-3">
                     @csrf
                     <div class="mb-3 mr-3 flex-grow-1">
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
